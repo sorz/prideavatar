@@ -14,18 +14,18 @@ ctx.resetTransform = () => ctx.setTransform(1, 0, 0, 1, 0, 0);
 const reader = new FileReader();
 const image = new Image();
 reader.onload = () => image.src = reader.result;
-image.onload = () => processAvatar(image);
+image.onload = redraw;
 
-document.getElementById('file').addEventListener('change', event =>
+document.getElementById('file').addEventListener('change', event => {
     reader.readAsDataURL(event.target.files[0])
-);
-scale.addEventListener('change', () => processAvatar(image));
-rotate.addEventListener('change', () => processAvatar(image));
+});
+scale.addEventListener('change', redraw);
+rotate.addEventListener('change', redraw);
 document.querySelectorAll('input[name=color]').forEach(input => {
-    input.addEventListener('change', () => processAvatar(image));
+    input.addEventListener('change', redraw);
 });
 
-function processAvatar(avatar) {
+function redraw() {
     const halfWidth = canvas.width / 2;
     // Reset
     ctx.restore();
@@ -66,11 +66,11 @@ function processAvatar(avatar) {
     const xOffset = (image.width - dimension) / 2;
     const yOffset = (image.height - dimension) / 2;
     ctx.drawImage(
-        avatar, xOffset, yOffset, dimension, dimension,
+        image, xOffset, yOffset, dimension, dimension,
         0, 0, canvas.width, canvas.height
     );
 
     download.href = canvas.toDataURL();
 }
 
-processAvatar(image);
+redraw();
