@@ -1,5 +1,9 @@
 'use strict';
-const RAINBOW_COLORS = ['#e50000', '#ff8d00', '#ffee00', '#008121', '#004cff', '#760188'];
+const COLOR_SCHEMES = {
+    'standard': ['#e50000', '#ff8d00', '#ffee00', '#008121', '#004cff', '#760188'],
+    'light':    ['#ff3333', '#ffaf4d', '#fff34d', '#00ce35', '#4d82ff', '#b802d4'],
+    'trans':    ['#5bcffa', '#f5abb9', '#ffffff', '#f5abb9', '#5bcffa']
+};
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const scale = document.getElementById('scale');
@@ -17,7 +21,9 @@ document.getElementById('file').addEventListener('change', event =>
 );
 scale.addEventListener('change', () => processAvatar(image));
 rotate.addEventListener('change', () => processAvatar(image));
-processAvatar(image);
+document.querySelectorAll('input[name=color]').forEach(input => {
+    input.addEventListener('change', () => processAvatar(image));
+});
 
 function processAvatar(avatar) {
     const halfWidth = canvas.width / 2;
@@ -27,14 +33,16 @@ function processAvatar(avatar) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw rainbow
+    const color = document.querySelector('input[name=color]:checked').value || 'standard';
+    const colors = COLOR_SCHEMES[color];
     const radians = rotate.value * Math.PI / 180;
-    const rainbowWidth = canvas.width / RAINBOW_COLORS.length;
+    const rainbowWidth = canvas.width / colors.length;
     const rainbowWidthExtra = rainbowWidth * Math.abs(Math.sin(radians * 2)) * 0.5;
-    console.log(`${rainbowWidth} + ${rainbowWidthExtra}`)
+
     ctx.translate(halfWidth, halfWidth);
     ctx.rotate(radians);
     ctx.translate(-canvas.width, -canvas.width);
-    RAINBOW_COLORS.forEach((color, i) => {
+    colors.forEach((color, i) => {
         ctx.fillStyle = color;
         ctx.fillRect(0, 0, canvas.width * 2, canvas.width);
         if (i == 0)
@@ -64,3 +72,5 @@ function processAvatar(avatar) {
 
     download.href = canvas.toDataURL();
 }
+
+processAvatar(image);

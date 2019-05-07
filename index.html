@@ -27,7 +27,11 @@
         <input id="rotate" type="range" min="-90" max="90" step="any" value="-30">
         <input id='file' type='file' accept='image/*'>
         <p>
-        <a id="download" download="pride-avatar.jpg">&gt; Save as JPEG</a></p>
+            <label><input type="radio" name="color" value="standard" checked>Standard</label>
+            <label><input type="radio" name="color" value="light">Light</label>
+            <label><input type="radio" name="color" value="trans">Trans</label>
+        </p>
+        <p><a id="download" download="pride-avatar.jpg">&gt; Save as JPEG</a></p>
     </form>
   </body>
 </html>
