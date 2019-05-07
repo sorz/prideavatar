@@ -4,6 +4,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const scale = document.getElementById('scale');
 const rotate = document.getElementById('rotate');
+const download = document.getElementById('download');
 ctx.resetTransform = () => ctx.setTransform(1, 0, 0, 1, 0, 0);
 
 const reader = new FileReader();
@@ -61,4 +62,5 @@ function processAvatar(avatar) {
         0, 0, canvas.width, canvas.height
     );
 
+    download.href = canvas.toDataURL();
 }

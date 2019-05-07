@@ -12,6 +12,8 @@
         .slider-wrapper input { width: 200px; height: 20px; margin-top: 50px;
             transform-origin: top left; transform: rotate(90deg); }
         #rotate { width: 200px; margin-left: 50px; }
+        #download { color: black; text-decoration: none; }
+        #download:hover { text-decoration: underline; }
     </style>
     <script src="pride.js" defer async></script>
   </head>
@@ -24,8 +26,8 @@
         <canvas id="canvas" width="300px" height="300px"></canvas>
         <input id="rotate" type="range" min="-90" max="90" step="any" value="-30">
         <input id='file' type='file' accept='image/*'>
+        <p>
+        <a id="download" download="pride-avatar.jpg">&gt; Save as JPEG</a></p>
     </form>
-
-
   </body>
 </html>
