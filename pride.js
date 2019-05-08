@@ -13,6 +13,7 @@ const ctx = canvas.getContext('2d');
 const scale = $('#scale');
 const rotate = $('#rotate');
 const download = $('#download');
+const form = $('form');
 ctx.resetTransform = () => ctx.setTransform(1, 0, 0, 1, 0, 0);
 
 // Generate color scheme list
@@ -42,6 +43,18 @@ $('#file').addEventListener('change', event => {
 });
 scale.addEventListener('change', redraw);
 rotate.addEventListener('change', redraw);
+
+function onDrop(ev) {
+    ev.preventDefault();
+    const files = ev.dataTransfer.files;
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (file.type.startsWith('image/')) {
+            reader.readAsDataURL(file);
+            break;
+        }
+    }
+};
 
 function redraw() {
     const halfWidth = canvas.width / 2;

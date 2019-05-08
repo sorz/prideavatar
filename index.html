@@ -8,7 +8,7 @@
     <script src="pride.js" defer async></script>
   </head>
   <body>
-    <form>
+    <form ondrop="onDrop(event);" ondragover="event.preventDefault()">
         <header><h1>Pride Avatar Generator</h1></header>
         <div class="slider-wrapper">
             <input id="scale" type="range" min="0.5" max="1.5" step="any" value="1">

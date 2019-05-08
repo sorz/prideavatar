@@ -19,3 +19,4 @@ footer {
 footer:hover { opacity: 1; }
 footer a { color: black; }
 #colors label { display: inline-block; text-transform: capitalize; }
+form.drop-over { background: #aaa; }
