@@ -46,7 +46,10 @@ function redraw() {
         ctx.fillStyle = color;
         ctx.fillRect(0, 0, canvas.width * 2, canvas.width);
         if (i == 0)
-            ctx.translate(0, halfWidth + rainbowWidth - rainbowWidthExtra * 2);
+            ctx.translate(0,
+                halfWidth + rainbowWidth -
+                (rainbowWidthExtra * (colors.length - 2) / 2)
+            );
         else
             ctx.translate(0, rainbowWidth + rainbowWidthExtra);
     });
