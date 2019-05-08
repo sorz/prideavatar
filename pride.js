@@ -5,26 +5,40 @@ const COLOR_SCHEMES = {
     'trans':    ['#5bcffa', '#f5abb9', '#ffffff', '#f5abb9', '#5bcffa'],
     'enby':     ['#b67fdb', '#ffffff', '#478121'],
 };
-const canvas = document.getElementById('canvas');
+const $ = (selector) => document.querySelector(selector);
+const canvas = $('#canvas');
 const ctx = canvas.getContext('2d');
-const scale = document.getElementById('scale');
-const rotate = document.getElementById('rotate');
-const download = document.getElementById('download');
+const scale = $('#scale');
+const rotate = $('#rotate');
+const download = $('#download');
 ctx.resetTransform = () => ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+// Generate color scheme list
+(() => {
+    const template = $('#color-radio')
+    const list = $('#colors');
+    Object.keys(COLOR_SCHEMES).forEach((name) => {
+        const clone = document.importNode(template.content, true);
+        const input = clone.querySelector('input');
+        const label = clone.querySelector('label');
+        input.value = name;
+        input.addEventListener('change', redraw);
+        label.appendChild(document.createTextNode(name));
+        list.appendChild(clone);
+    });
+})();
+
 
 const reader = new FileReader();
 const image = new Image();
 reader.onload = () => image.src = reader.result;
 image.onload = redraw;
 
-document.getElementById('file').addEventListener('change', event => {
+$('#file').addEventListener('change', event => {
     reader.readAsDataURL(event.target.files[0])
 });
 scale.addEventListener('change', redraw);
 rotate.addEventListener('change', redraw);
-document.querySelectorAll('input[name=color]').forEach(input => {
-    input.addEventListener('change', redraw);
-});
 
 function redraw() {
     const halfWidth = canvas.width / 2;
@@ -34,7 +48,7 @@ function redraw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw rainbow
-    const color = document.querySelector('input[name=color]:checked').value || 'standard';
+    const color = $('input[name=color]:checked').value || 'standard';
     const colors = COLOR_SCHEMES[color];
     const radians = rotate.value * Math.PI / 180;
     const rainbowWidth = canvas.width / colors.length;

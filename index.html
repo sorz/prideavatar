@@ -18,7 +18,7 @@
             opacity: 0.3; transition: all 0.2s ease-in-out; }
         footer:hover { opacity: 1; }
         footer a { color: black; }
-        #colors label { display: inline-block; }
+        #colors label { display: inline-block; text-transform: capitalize; }
     </style>
     <script src="pride.js" defer async></script>
   </head>
@@ -32,10 +32,9 @@
         <input id="rotate" type="range" min="-90" max="90" step="any" value="-30">
         <input id='file' type='file' accept='image/*'>
         <p id="colors">
-            <label><input type="radio" name="color" value="standard" checked>Standard</label>
-            <label><input type="radio" name="color" value="modern">Modern</label>
-            <label><input type="radio" name="color" value="trans">Trans</label>
-            <label><input type="radio" name="color" value="enby">Enby</label>
+            <template id="color-radio">
+                <label><input type="radio" name="color" checked></label>
+            </template>
         </p>
         <p><a id="download" download="pride-avatar.jpg">&gt; Save as JPEG</a></p>
     </form>
