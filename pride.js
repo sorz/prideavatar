@@ -32,7 +32,7 @@ ctx.resetTransform = () => ctx.setTransform(1, 0, 0, 1, 0, 0);
     });
 })();
 
-
+// Redraw after avatar file read
 const reader = new FileReader();
 const image = new Image();
 reader.onload = () => image.src = reader.result;
@@ -44,9 +44,10 @@ $('#file').addEventListener('change', event => {
 scale.addEventListener('change', redraw);
 rotate.addEventListener('change', redraw);
 
-function onDrop(ev) {
-    ev.preventDefault();
-    const files = ev.dataTransfer.files;
+// Handle dropping image file
+function onDrop(event) {
+    event.preventDefault();
+    const files = event.dataTransfer.files;
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
         if (file.type.startsWith('image/')) {
@@ -55,6 +56,16 @@ function onDrop(ev) {
         }
     }
 };
+
+// Handle mouse wheel to scaling
+canvas.addEventListener('wheel', event => {
+    event.preventDefault();
+    let x = parseFloat(scale.value);
+    if (event.deltaY < 0) x -= 0.05;
+    else x += 0.05;
+    scale.value = x;
+    redraw();
+});
 
 function redraw() {
     const halfWidth = canvas.width / 2;
