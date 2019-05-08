@@ -19,11 +19,12 @@ ctx.resetTransform = () => ctx.setTransform(1, 0, 0, 1, 0, 0);
 (() => {
     const template = $('#color-radio')
     const list = $('#colors');
-    Object.keys(COLOR_SCHEMES).forEach((name) => {
+    Object.keys(COLOR_SCHEMES).forEach((name, i) => {
         const clone = document.importNode(template.content, true);
         const input = clone.querySelector('input');
         const label = clone.querySelector('label');
         input.value = name;
+        input.checked = i == 1;
         input.addEventListener('change', redraw);
         label.appendChild(document.createTextNode(name));
         list.appendChild(clone);
