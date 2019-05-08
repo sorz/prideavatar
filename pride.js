@@ -4,6 +4,8 @@ const COLOR_SCHEMES = {
     'modern':   ['#E53935', '#FB8C00', '#FDD835', '#43A047', '#1E88E5', '#8E24AA'],
     'trans':    ['#5bcffa', '#f5abb9', '#ffffff', '#f5abb9', '#5bcffa'],
     'enby':     ['#b67fdb', '#ffffff', '#478121'],
+    'ace':      ['#000000', '#a4a4a4', '#ffffff', '#81047f'],
+    'pan':      ['#ff1e8c', '#fed818', '#1fb2fd'],
 };
 const $ = (selector) => document.querySelector(selector);
 const canvas = $('#canvas');
