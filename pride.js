@@ -2,6 +2,7 @@
 const COLOR_SCHEMES = {
     'standard': ['#e50000', '#ff8d00', '#ffee00', '#008121', '#004cff', '#760188'],
     'modern':   ['#E53935', '#FB8C00', '#FDD835', '#43A047', '#1E88E5', '#8E24AA'],
+    'pastell':  ['#F67A7D', '#FFC268', '#F6F58A', '#A1DF91', '#71A1D5', '#957CB0'],
     'trans':    ['#5bcffa', '#f5abb9', '#ffffff', '#f5abb9', '#5bcffa'],
     'enby':     ['#b67fdb', '#ffffff', '#478121'],
     'ace':      ['#000000', '#a4a4a4', '#ffffff', '#81047f'],
